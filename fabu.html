@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>发布留言</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{max-width:600px;margin:40px auto;padding:0 20px;background:#f5f7fa}
+.box{background:#fff;padding:25px;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,0.08)}
+h1{text-align:center;margin-bottom:25px;color:#333}
+input,textarea{width:100%;padding:14px;margin:10px 0;border:1px solid #e0e0e0;border-radius:8px;font-size:16px}
+button{width:100%;padding:15px;background:#409eff;color:#fff;border:none;border-radius:8px;font-size:17px;cursor:pointer}
+button:hover{background:#337ecc}
+a{display:block;text-align:center;margin-top:20px;color:#409eff;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>📝 发布留言</h1>
+<input type="text" id="name" placeholder="你的昵称" required>
+<textarea id="content" rows="5" placeholder="写下你的留言..." required></textarea>
+<button onclick="send()">提交留言</button>
+<a href="chakan.html">去查看所有留言</a>
+</div>
+
+<script>
+function send(){
+let name=document.getElementById("name").value.trim()
+let content=document.getElementById("content").value.trim()
+if(!name||!content){alert("昵称和内容不能为空");return}
+let time=new Date().toLocaleString()
+let msg={name,content,time}
+let list=JSON.parse(localStorage.getItem("msgs")||"[]")
+list.unshift(msg)
+localStorage.setItem("msgs",JSON.stringify(list))
+alert("发布成功！")
+document.getElementById("name").value=""
+document.getElementById("content").value=""
+}
+</script>
+</body>
+</html>

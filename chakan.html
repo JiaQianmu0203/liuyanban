@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>所有留言</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{max-width:700px;margin:40px auto;padding:0 20px;background:#f5f7fa}
+.box{background:#fff;padding:25px;border-radius:12px;box-shadow:0 2px 15px rgba(0,0,0,0.08)}
+h1{text-align:center;margin-bottom:25px;color:#333}
+.item{padding:18px;border-bottom:1px solid #f0f0f0}
+.name{font-weight:bold;color:#409eff;margin-bottom:6px}
+.content{line-height:1.6;color:#333;margin-bottom:6px}
+.time{font-size:12px;color:#999}
+a{display:block;text-align:center;margin-top:20px;color:#409eff;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="box">
+<h1>💬 所有留言</h1>
+<div id="list"></div>
+<a href="fabu.html">返回发布留言</a>
+</div>
+
+<script>
+function render(){
+let list=JSON.parse(localStorage.getItem("msgs")||"[]")
+let html=""
+list.forEach(i=>{
+html+=`
+<div class="item">
+<div class="name">${i.name}</div>
+<div class="content">${i.content}</div>
+<div class="time">${i.time}</div>
+</div>
+`
+})
+document.getElementById("list").innerHTML=html||"<p>暂无留言</p>"
+}
+window.onload=render
+</script>
+</body>
+</html>
